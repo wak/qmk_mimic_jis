@@ -14,6 +14,9 @@
   https://github.com/sekigon-gonnoc/keyboard-quantizer-doc
   > make keyboard_quantizer/rev3:mimic_jis2
 
+そもまま書き込む場合は、:flashをつける。
+> make keyboard_quantizer/rev3:mimic_jis2:flash
+
 ## カスタマイズ
 以下のカスタマイズが可能です。
 `#include "mimic_jis2.c"` の前に、以下のマクロを `#define` してください。
@@ -115,5 +118,44 @@ git clone https://github.com/sekigon-gonnoc/qmk_firmware.git -b dev/sekigon qmk_
 cd qmk_quantizer
 ln -s ../qmk_mimic_jis/mimic_jis2 .
 ln -s ../../../../qmk_mimic_jis/keyboards/keyboard_quantizer/keymaps/mimic_jis2 keyboards/keyboard_quantizer/keymaps/
+```
+
+keyboards/keyboard_quantizer/keyboard_quantizer.hを修正します。
+```
+diff --git a/keyboards/keyboard_quantizer/keyboard_quantizer.h b/keyboards/keyboard_quantizer/keyboard_quantizer.h
+index 278da053d5..6daf780ba6 100644
+--- a/keyboards/keyboard_quantizer/keyboard_quantizer.h
++++ b/keyboards/keyboard_quantizer/keyboard_quantizer.h
+@@ -79,7 +79,7 @@ lctrl, lgui, lalt, mhen, spc, henk, kana, ralt, rgui, app, rctrl,        left, d
+     { u, v, w, x, y, z, k1, k2}, \
+     { k3, k4, k5, k6, k7, k8, k9, k0}, \
+     {ent, esc, bspc, tab, spc, min, circ, at}, \
+-    {lbrc, KC_BSLASH, rbrc, scln, cln, hanzen, comm, dot}, \
++    {lbrc, yen, rbrc, scln, cln, hanzen, comm, dot}, \
+     {slsh, caps, f1, f2, f3, f4, f5, f6}, \
+     {f7, f8, f9, f10, f11, f12, pscr, scrl}, \
+     {pause, ins, home, pageup, del, end, pagedown, right}, \
+```
+
+```
 make keyboard_quantizer/rev3:mimic_jis2
+```
+
+# Keyboard Quantizer Rev3のメモ
+タイムアウトを伸ばしたい場合は、以下のようにする。
+
+```
+diff --git a/keyboards/keyboard_quantizer/rev3/matrix.c b/keyboards/keyboard_quantizer/rev3/matrix.c
+index f9a5e4eac2..a7e11d7a05 100644
+--- a/keyboards/keyboard_quantizer/rev3/matrix.c
++++ b/keyboards/keyboard_quantizer/rev3/matrix.c
+@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ #include "keyboard_quantizer.h"
+
+ bool no_com_from_start = true;
+-#define KEYBOARD_NOCOM_TIMEOUT 3000
++#define KEYBOARD_NOCOM_TIMEOUT 10000
+ #define CH559_NOCOM_TIMEOUT 30000
+
+ extern const bool    ch559_start;
 ```
