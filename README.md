@@ -118,6 +118,7 @@ git clone https://github.com/sekigon-gonnoc/qmk_firmware.git -b dev/sekigon qmk_
 cd qmk_quantizer
 ln -s ../qmk_mimic_jis/mimic_jis2 .
 ln -s ../../../../qmk_mimic_jis/keyboards/keyboard_quantizer/keymaps/mimic_jis2 keyboards/keyboard_quantizer/keymaps/
+ln -s ../../../../qmk_mimic_jis/keyboards/keyboard_quantizer/keymaps/screen_keeper/ keyboards/keyboard_quantizer/keymaps/
 ```
 
 keyboards/keyboard_quantizer/keyboard_quantizer.hを修正します。
@@ -139,6 +140,7 @@ index 278da053d5..6daf780ba6 100644
 
 ```
 make keyboard_quantizer/rev3:mimic_jis2
+make keyboard_quantizer/rev3:screen_keeper
 ```
 
 # Keyboard Quantizer Rev3のメモ
